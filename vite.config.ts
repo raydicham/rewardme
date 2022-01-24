@@ -14,6 +14,7 @@ import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 import Prism from 'markdown-it-prism'
 import LinkAttributes from 'markdown-it-link-attributes'
+import svgLoader from 'vite-svg-loader'
 import { quasar as Quasar, transformAssetUrls } from '@quasar/vite-plugin'
 
 const markdownWrapperClasses = 'prose prose-sm m-auto text-left'
@@ -29,6 +30,8 @@ export default defineConfig({
       include: [/\.vue$/, /\.md$/],
       template: { transformAssetUrls },
     }),
+
+    svgLoader(),
 
     Quasar({
       sassVariables: 'src/styles/quasar-variables.sass',

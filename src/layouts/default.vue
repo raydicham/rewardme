@@ -1,9 +1,50 @@
 <template>
-  <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200">
-    <router-view />
-    <Footer />
-    <div class="mt-5 mx-auto text-center opacity-25 text-sm">
-      [Default Layout]
-    </div>
-  </main>
+  <div class="max-w-screen-2xl mx-auto">
+    <q-layout view="lHr LpR lFr" container style="height:100vh">
+      <q-header>
+        <q-toolbar>
+          <q-toolbar-title class="shrink-0 overflow-visible">
+            <q-btn to="/" flat padding="0" size="lg" no-caps>
+              RewardMe
+            </q-btn>
+          </q-toolbar-title>
+          <div w="full" class="flex justify-center">
+            <q-tabs class="mobile-hide ">
+              <q-route-tab name="kids" to="/">
+                Kids
+              </q-route-tab>
+              <q-route-tab name="rewards" to="/rewards">
+                Rewards
+              </q-route-tab>
+              <q-route-tab name="tasks" to="/tasks">
+                Tasks
+              </q-route-tab>
+            </q-tabs>
+          </div>
+          <q-btn size="lg" flat to="/settings">
+            <carbon-settings />
+          </q-btn>
+        </q-toolbar>
+      </q-header>
+      <q-page-container>
+        <router-view />
+      </q-page-container>
+      <q-footer elevated class="desktop-hide">
+        <q-tabs :align="'center'">
+          <q-route-tab name="kids" to="/">
+            <carbon-pedestrian-child />
+            Kids
+          </q-route-tab>
+          <q-route-tab name="rewards" to="/rewards">
+            <carbon-gift />
+            Rewards
+          </q-route-tab>
+          <q-route-tab name="tasks" to="/tasks">
+            <carbon-task />
+            Tasks
+          </q-route-tab>
+        </q-tabs>
+      </q-footer>
+    </q-layout>
+  </div>
 </template>

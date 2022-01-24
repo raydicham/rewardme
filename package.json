@@ -18,10 +18,12 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.0.9",
     "prism-theme-vars": "^0.2.2",
+    "uuid": "^8.3.2",
     "vue": "^3.2.26",
     "vue-demi": "^0.12.1",
     "vue-i18n": "^9.1.9",
-    "vue-router": "^4.0.12"
+    "vue-router": "^4.0.12",
+    "zod": "^3.11.6"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.16.0",
@@ -30,6 +32,7 @@
     "@quasar/vite-plugin": "^1.0.4",
     "@types/markdown-it-link-attributes": "^3.0.1",
     "@types/nprogress": "^0.2.0",
+    "@types/uuid": "^8.3.4",
     "@vitejs/plugin-vue": "^2.0.1",
     "@vue/compiler-sfc": "^3.2.26",
     "@vue/server-renderer": "^3.2.26",
@@ -57,6 +60,7 @@
     "vite-plugin-vue-layouts": "^0.5.0",
     "vite-plugin-windicss": "^1.6.2",
     "vite-ssg": "^0.17.6",
+    "vite-svg-loader": "^3.1.2",
     "vitest": "^0.1.13",
     "vue-tsc": "^0.30.2"
   }
