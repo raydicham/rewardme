@@ -1,6 +1,6 @@
 <template>
-  <div class="max-w-screen-2xl mx-auto">
-    <q-layout view="lHr LpR lFr" container style="height:100vh">
+  <div class="max-w-screen-2xl mx-auto h-full">
+    <q-layout view="lHr LpR lFr" container style="height:100%">
       <q-header>
         <q-toolbar>
           <q-toolbar-title class="shrink-0 overflow-visible">
