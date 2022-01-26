@@ -17,15 +17,19 @@ const rewardStore = useRewards()
 const router = useRouter()
 const task = reactive({
   name: '',
-  reward: props.reward,
 } as TaskType)
 
 const linkedReward = rewardStore.getById(props.reward)
 
 function onSubmit() {
-  const parsed = Task.parse(task)
-  store.storeNewTask(parsed)
-  router.push('/rewards')
+  const safeTask = Task.safeParse(task)
+  if (safeTask.success) {
+    store.storeNewTask(linkedReward, safeTask.data)
+    router.push('/rewards')
+  }
+  else {
+    console.error(safeTask)
+  }
 }
 
 function onReset() {

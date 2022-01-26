@@ -2,7 +2,6 @@
 import coverPng from '~/png/children.png'
 import { useProfiles } from '~/stores/profiles'
 const profileStore = useProfiles()
-
 </script>
 
 <template>
@@ -33,9 +32,9 @@ const profileStore = useProfiles()
               <q-item-section>Add Profile</q-item-section>
             </q-item>
             <q-separator />
-            <template v-if="profileStore.profiles.length > 0">
+            <template v-if="profileStore.profiles">
               <q-item
-                v-for="profile in profileStore.profiles" :key="profile.id"
+                v-for="(profile,key) in profileStore.profiles" :key="key"
                 v-ripple
                 clickable @click="profileStore.setActiveProfile(profile)"
               >
@@ -45,7 +44,7 @@ const profileStore = useProfiles()
                 <q-item-section class="capitalize">
                   {{ profile.name }}
                 </q-item-section>
-                <q-item-section v-if="profileStore.activeProfile === profile.id" side>
+                <q-item-section v-if="profileStore.active.id === profile.id" side>
                   <carbon-star />
                 </q-item-section>
               </q-item>

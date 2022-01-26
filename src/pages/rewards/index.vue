@@ -35,9 +35,9 @@ const taskStore = useTasks()
               <q-item-section>Add Reward</q-item-section>
             </q-item>
             <q-separator />
-            <div v-if="store.currentProfileRewards.length > 0">
+            <div v-if="Object.keys(store.rewards).length > 0">
               <q-item
-                v-for="reward in store.currentProfileRewards"
+                v-for="reward in store.rewards"
                 :key="reward.id"
               >
                 <q-item-section v-if="reward.image" avatar>

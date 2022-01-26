@@ -1,17 +1,13 @@
 <script setup lang="ts">
 import type { z } from 'zod'
 import { Reward } from '~/schemas'
-import { useProfiles } from '~/stores/profiles'
 import { useRewards } from '~/stores/rewards'
 
 type RewardType = z.infer<typeof Reward>
 const router = useRouter()
 const rewardStore = useRewards()
-const profileStore = useProfiles()
 const reward = reactive({
   name: '',
-  profile: profileStore.activeProfile,
-
 } as RewardType)
 
 const rewardImage = ref()
@@ -23,9 +19,11 @@ watch(rewardImage, () => {
 })
 
 function onSubmit() {
-  const parsed = Reward.parse(reward)
-  rewardStore.storeNewReward(parsed)
-  router.push('/rewards')
+  const safeReward = Reward.safeParse(reward)
+  if (safeReward.success) {
+    rewardStore.storeNewReward(safeReward.data)
+    router.push('/rewards')
+  }
 }
 
 function onReset() {

@@ -7,29 +7,22 @@ type RewardType = z.infer<typeof Reward>
 
 export const useRewards = defineStore('rewards', () => {
   const profileStore = useProfiles()
-  const rewards = ref(new Array<RewardType>())
+  const rewards = computed(() => {
+    return profileStore.active.rewards
+  })
 
   function storeNewReward(reward: RewardType) {
-    rewards.value.push(reward)
+    profileStore.active.rewards[reward.id] = reward
     return reward
   }
 
   function getById(id: string) {
-    return rewards.value.find((reward) => {
-      return reward.id === id
-    })
+    return profileStore.active.rewards[id]
   }
-
-  const currentProfileRewards = computed(() => {
-    return rewards.value.filter((reward) => {
-      return reward.profile === profileStore.activeProfile
-    })
-  })
 
   return {
     rewards,
     storeNewReward,
-    currentProfileRewards,
     getById,
   }
 })

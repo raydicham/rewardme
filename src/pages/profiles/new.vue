@@ -5,12 +5,13 @@ import { useProfiles } from '~/stores/profiles'
 
 type ProfileType = z.infer<typeof Profile>
 const router = useRouter()
-const { storeNewProfile } = useProfiles()
+const profileStore = useProfiles()
 const profile = reactive({
   name: '',
   nickname: '',
   color: '',
   hobby: '',
+  rewards: {},
 } as ProfileType)
 
 const profileImage = ref()
@@ -23,9 +24,12 @@ watch(profileImage, () => {
 
 function onSubmit() {
   profile.dateofbirth = new Date(profile.dateofbirth)
-  const parsed = Profile.parse(profile)
-  storeNewProfile(parsed)
-  router.push('/')
+  const safeProfile = Profile.safeParse(profile)
+  if (safeProfile.success) {
+    profileStore.storeNewProfile(safeProfile.data)
+    profileStore.setActiveProfile(safeProfile.data)
+    router.push('/')
+  }
 }
 
 function onReset() {

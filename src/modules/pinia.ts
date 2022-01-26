@@ -11,7 +11,8 @@ export const install: UserModule = ({ isClient, initialState, app }) => {
   app.use(pinia)
 
   pinia.use(({ store }) => {
-    if (import.meta.env.DEV) {
+    // if (import.meta.env.DEV) {
+    if (false) {
       store.activeProfile = testProfiles[0].id
       store.profiles = testProfiles.map((profile) => {
         const dateofbirth = new Date(profile.dateofbirth)

@@ -1,19 +1,21 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import type { z } from 'zod'
-import type { Task } from '~/schemas'
+import { useProfiles } from './profiles'
+import type { Reward, Task } from '~/schemas'
 
 type TaskType = z.infer<typeof Task>
+type RewardType = z.infer<typeof Reward>
 
 export const useTasks = defineStore('tasks', () => {
-  const tasks = ref(new Array<TaskType>())
+  const profileStore = useProfiles()
 
-  function storeNewTask(task: TaskType) {
-    tasks.value.push(task)
+  function storeNewTask(reward: RewardType, task: TaskType) {
+    profileStore.active.rewards[reward.id].tasks[task.id] = task
     return task
   }
 
   function getByReward(id: string) {
-    return tasks.value.filter(task => task.reward === id)
+    return profileStore.active.rewards[id].tasks
   }
 
   return {
