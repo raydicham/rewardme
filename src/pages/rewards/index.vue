@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import coverPng from '~/png/reward.png'
-import { useRewards } from '~/stores/rewards'
-import { useTasks } from '~/stores/tasks'
-const store = useRewards()
-const taskStore = useTasks()
+import { useProfiles } from '~/stores/profiles'
+const store = useProfiles()
+const rewards = store.active.rewards
 </script>
 
 <template>
   <q-page>
     <div class="flex flex-col items-center">
-      <q-card w="full md:1/2">
+      <q-card w="full md:2/3 xl:1/2" p="0">
         <q-img
           :ratio="16/9"
           :src="coverPng"
@@ -20,9 +19,10 @@ const taskStore = useTasks()
             Rewards
           </div>
         </q-img>
-        <q-card-section>
+        <q-card-section p="0 sm:4">
           <q-list bordered>
             <q-item
+              v-if="!!rewards"
               v-ripple
               clickable
               class="bg-secondary text-white"
@@ -35,10 +35,14 @@ const taskStore = useTasks()
               <q-item-section>Add Reward</q-item-section>
             </q-item>
             <q-separator />
-            <div v-if="Object.keys(store.rewards).length > 0">
+            <div v-if="!!rewards && Object.keys(rewards).length > 0">
               <q-item
-                v-for="reward in store.rewards"
+                v-for="reward in rewards"
                 :key="reward.id"
+                tag="label"
+                :to="{name: 'rewards-rewardid', params: {
+                  rewardid: reward.id
+                }}"
               >
                 <q-item-section v-if="reward.image" avatar>
                   <img :src="reward.image" alt="" w="50px" border="rounded-full">
@@ -49,20 +53,14 @@ const taskStore = useTasks()
                   </q-item-label>
                   <q-item-label caption>
                     <ul class="list-disc list-inside">
-                      <li v-for="task in taskStore.getByReward(reward.id)" :key="task.id">
+                      <li v-for="task in reward.tasks" :key="task.id">
                         {{ task.name }}
                       </li>
                     </ul>
                   </q-item-label>
                 </q-item-section>
                 <q-item-section side>
-                  <q-btn
-                    label="Add Task" :to="{name: 'tasks-new-reward', params: {
-                      reward: reward.id
-                    }}"
-                  >
-                    <carbon-add />
-                  </q-btn>
+                  <carbon-chevron-right text="xl" font="bold" />
                 </q-item-section>
               </q-item>
             </div>

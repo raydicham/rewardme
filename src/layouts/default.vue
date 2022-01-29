@@ -16,9 +16,6 @@
               <q-route-tab name="rewards" to="/rewards">
                 Rewards
               </q-route-tab>
-              <q-route-tab name="tasks" to="/tasks">
-                Tasks
-              </q-route-tab>
             </q-tabs>
           </div>
           <q-btn size="lg" flat to="/settings">
@@ -38,10 +35,6 @@
           <q-route-tab name="rewards" to="/rewards">
             <carbon-gift />
             Rewards
-          </q-route-tab>
-          <q-route-tab name="tasks" to="/tasks">
-            <carbon-task />
-            Tasks
           </q-route-tab>
         </q-tabs>
       </q-footer>

@@ -25,7 +25,12 @@ function onSubmit() {
   const safeTask = Task.safeParse(task)
   if (safeTask.success) {
     store.storeNewTask(linkedReward, safeTask.data)
-    router.push('/rewards')
+    router.push({
+      name: 'rewards-rewardid',
+      params: {
+        rewardid: props.reward,
+      },
+    })
   }
   else {
     console.error(safeTask)

@@ -8,7 +8,7 @@ type RewardType = z.infer<typeof Reward>
 export const useRewards = defineStore('rewards', () => {
   const profileStore = useProfiles()
   const rewards = computed(() => {
-    return profileStore.active.rewards
+    return profileStore.active?.rewards
   })
 
   function storeNewReward(reward: RewardType) {

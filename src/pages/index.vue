@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import coverPng from '~/png/children.png'
 import { useProfiles } from '~/stores/profiles'
-const profileStore = useProfiles()
+const store = useProfiles()
 </script>
 
 <template>
@@ -32,20 +32,54 @@ const profileStore = useProfiles()
               <q-item-section>Add Profile</q-item-section>
             </q-item>
             <q-separator />
-            <template v-if="profileStore.profiles">
+            <template v-if="store.profiles">
               <q-item
-                v-for="(profile,key) in profileStore.profiles" :key="key"
-                v-ripple
-                clickable @click="profileStore.setActiveProfile(profile)"
+                v-for="(profile,key) in store.profiles" :key="key"
               >
                 <q-item-section v-if="profile.image" avatar>
                   <img :src="profile.image" alt="" w="50px" border="rounded-full">
                 </q-item-section>
-                <q-item-section class="capitalize">
-                  {{ profile.name }}
+                <q-item-section>
+                  <q-item-label class="capitalize">
+                    {{ profile.name }}
+                  </q-item-label>
+                  <q-item-label class="capitalize" caption>
+                    {{ profile.nickname }}
+                  </q-item-label>
                 </q-item-section>
-                <q-item-section v-if="profileStore.active.id === profile.id" side>
-                  <carbon-star />
+                <q-item-section v-if="store.active.id === profile.id" side class="text-primary">
+                  <q-btn unelevated disabled>
+                    <div class="flex items-center">
+                      <span p="r-2">Active</span> <carbon-star />
+                    </div>
+                  </q-btn>
+                </q-item-section>
+                <q-item-section v-else side class="text-secondary">
+                  <q-btn unelevated @click="store.setActiveProfile(profile)">
+                    <div class="flex items-center">
+                      <span p="r-2">switch</span> <carbon-touch-1 />
+                    </div>
+                  </q-btn>
+                </q-item-section>
+                <q-item-section side>
+                  <q-btn stretch>
+                    <carbon-overflow-menu-vertical />
+                    <q-menu border="1 white" :offset="[0,5]">
+                      <q-list style="min-width: 100px">
+                        <q-item v-close-popup clickable class="bg-red-6 text-dark" @click="store.archiveProfile(profile)">
+                          <q-item-section class="flex items-center">
+                            <carbon-trash-can class="text-xl" />
+                          </q-item-section>
+                        </q-item>
+                        <q-separator />
+                        <q-item v-close-popup clickable class="bg-primary" to="/settings">
+                          <q-item-section class="flex items-center">
+                            <carbon-edit class="text-xl" />
+                          </q-item-section>
+                        </q-item>
+                      </q-list>
+                    </q-menu>
+                  </q-btn>
                 </q-item-section>
               </q-item>
             </template>
