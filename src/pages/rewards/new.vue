@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { z } from 'zod'
+import imageCache from '~/composites/imageCache'
 import { Reward } from '~/schemas'
 import { useRewards } from '~/stores/rewards'
 
@@ -11,11 +12,16 @@ const reward = reactive({
 } as RewardType)
 
 const rewardImage = ref()
+const previewImage = ref()
 
 watch(rewardImage, () => {
   const reader = new FileReader()
   reader.readAsDataURL(rewardImage.value as Blob)
-  reader.onload = () => reward.image = reader.result as string
+  reader.onload = async() => {
+    await imageCache.setImage(rewardImage.value.name, reader.result as string)
+    previewImage.value = await imageCache.getImage(rewardImage.value.name)
+    reward.image = rewardImage.value.name
+  }
 })
 
 function onSubmit() {
@@ -27,7 +33,9 @@ function onSubmit() {
 }
 
 function onReset() {
-  Object.assign(reward, Reward.parse({}))
+  Object.assign(reward, Reward.parse({ name: '' }))
+  rewardImage.value = null
+  previewImage.value = null
 }
 </script>
 
@@ -44,7 +52,12 @@ function onReset() {
         </q-card-section>
       </q-card>
     </q-expansion-item>
-
+    <q-img
+      :src="previewImage"
+      :ratio="16/9"
+      spinner-color="primary"
+      spinner-size="82px"
+    />
     <q-form
       class="q-gutter-md"
       @submit="onSubmit"

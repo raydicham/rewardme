@@ -1,7 +1,17 @@
 <script setup lang="ts">
+import imageCache from '~/composites/imageCache'
 import coverPng from '~/png/children.png'
 import { useProfiles } from '~/stores/profiles'
 const store = useProfiles()
+const profileImages = ref({} as Record<string, string>)
+
+Object.values(store.profiles)
+  .map(async(profile) => {
+    if (profile.image !== undefined) {
+      const image = await imageCache.getImage(profile.image)
+      if (image) profileImages.value[profile.image] = image
+    }
+  })
 </script>
 
 <template>
@@ -36,8 +46,8 @@ const store = useProfiles()
               <q-item
                 v-for="(profile,key) in store.profiles" :key="key"
               >
-                <q-item-section v-if="profile.image" avatar>
-                  <img :src="profile.image" alt="" w="50px" border="rounded-full">
+                <q-item-section avatar>
+                  <img :src="profile.image && profileImages[profile.image]" alt="" w="50px" border="rounded-full">
                 </q-item-section>
                 <q-item-section>
                   <q-item-label class="capitalize">

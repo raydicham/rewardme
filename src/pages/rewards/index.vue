@@ -1,8 +1,18 @@
 <script setup lang="ts">
+import imageCache from '~/composites/imageCache'
 import coverPng from '~/png/reward.png'
 import { useProfiles } from '~/stores/profiles'
 const store = useProfiles()
 const rewards = store.active.rewards
+const rewardImages = ref({} as Record<string, string>)
+
+rewards && Object.values(rewards)
+  .map(async(reward) => {
+    if (reward.image !== undefined) {
+      const image = await imageCache.getImage(reward.image)
+      if (image) rewardImages.value[reward.image] = image
+    }
+  })
 </script>
 
 <template>
@@ -45,7 +55,7 @@ const rewards = store.active.rewards
                 }}"
               >
                 <q-item-section v-if="reward.image" avatar>
-                  <img :src="reward.image" alt="" w="50px" border="rounded-full">
+                  <img :src="reward.image && rewardImages[reward.image]" alt="" w="50px" border="rounded-full">
                 </q-item-section>
                 <q-item-section>
                   <q-item-label>

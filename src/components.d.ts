@@ -6,7 +6,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     CarbonAdd: typeof import('~icons/carbon/add')['default']
     CarbonArrowDownRight: typeof import('~icons/carbon/arrow-down-right')['default']
-    CarbonArrowRight: typeof import('~icons/carbon/arrow-right')['default']
     CarbonCalendar: typeof import('~icons/carbon/calendar')['default']
     CarbonChevronRight: typeof import('~icons/carbon/chevron-right')['default']
     CarbonColorPalette: typeof import('~icons/carbon/color-palette')['default']
@@ -16,7 +15,6 @@ declare module 'vue' {
     CarbonPedestrianChild: typeof import('~icons/carbon/pedestrian-child')['default']
     CarbonSettings: typeof import('~icons/carbon/settings')['default']
     CarbonStar: typeof import('~icons/carbon/star')['default']
-    CarbonTask: typeof import('~icons/carbon/task')['default']
     CarbonTouch1: typeof import('~icons/carbon/touch1')['default']
     CarbonTrashCan: typeof import('~icons/carbon/trash-can')['default']
     CarbonUserFollow: typeof import('~icons/carbon/user-follow')['default']

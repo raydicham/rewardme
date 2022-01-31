@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { z } from 'zod'
+import imageCache from '~/composites/imageCache'
 import type { Task } from '~/schemas'
 import { useProfiles } from '~/stores/profiles'
 
@@ -20,6 +21,12 @@ const tasks = reward.tasks
 function deleteTask(task: TaskType) {
   delete tasks[task.id]
 }
+
+const rewardImage = ref()
+reward.image && imageCache.getImage(reward.image).then((image) => {
+  rewardImage.value = image
+})
+
 </script>
 
 <template>
@@ -27,9 +34,8 @@ function deleteTask(task: TaskType) {
     <div class="flex flex-col items-center">
       <q-card w="full md:1/2">
         <q-img
-          v-if="reward.image"
           :ratio="16/9"
-          :src="reward.image"
+          :src="rewardImage"
           spinner-color="primary"
           spinner-size="82px"
         >

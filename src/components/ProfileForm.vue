@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { z } from 'zod'
+import imageCache from '~/composites/imageCache'
 import { Profile } from '~/schemas'
 type ProfileType = z.infer<typeof Profile>
 
@@ -20,11 +21,16 @@ const emits = defineEmits(['submit'])
 const profile = reactive(Profile.parse(props.modelValue))
 
 const profileImage = ref()
+const previewImage = ref()
 
 watch(profileImage, () => {
   const reader = new FileReader()
   reader.readAsDataURL(profileImage.value as Blob)
-  reader.onload = () => profile.image = reader.result as string
+  reader.onload = async() => {
+    await imageCache.setImage(profileImage.value.name, reader.result as string)
+    previewImage.value = await imageCache.getImage(profileImage.value.name)
+    profile.image = profileImage.value.name
+  }
 })
 
 function onSubmit() {
@@ -89,6 +95,13 @@ const colortrigger = ref(undefined)
       <q-file v-model="profileImage" outlined>
         <template #prepend>
           <q-icon name="attach_file" />
+        </template>
+        <template #append>
+          <q-avatar size="50px">
+            <q-img
+              :src="previewImage"
+            />
+          </q-avatar>
         </template>
       </q-file>
       <div>

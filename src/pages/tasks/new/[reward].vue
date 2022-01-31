@@ -62,7 +62,7 @@ function onReset() {
       @reset="onReset"
     >
       <q-input v-model="task.name" label="Name" required stack-label />
-      <q-input :model-value="linkedReward?.name" label="Reward" disable stack-label />
+      <q-input readonly :placeholder="linkedReward?.name" model-value="" label="Reward" stack-label />
       <div>
         <q-btn label="Submit" type="submit" color="primary" />
         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
