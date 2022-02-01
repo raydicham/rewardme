@@ -25,9 +25,9 @@ export const Profile = z.object(
     id: z.string().default(() => uuidv4()),
     name: z.string(),
     nickname: z.string().default(''),
-    dateofbirth: z.string(),
+    dateofbirth: z.string().default(''),
     hobby: z.string().default(''),
-    color: z.string(),
+    color: z.string().default(''),
     image: z.string().optional(), // as base64
     rewards: z.record(z.string(), Reward).default({}),
   },
