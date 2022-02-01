@@ -40,7 +40,7 @@ function onReset() {
 </script>
 
 <template>
-  <div class="md:w-1/2 mx-auto">
+  <div class="p-4 md:p-0 md:w-1/2 mx-auto">
     New Reward
     <q-expansion-item
       expand-separator
@@ -52,12 +52,6 @@ function onReset() {
         </q-card-section>
       </q-card>
     </q-expansion-item>
-    <q-img
-      :src="previewImage"
-      :ratio="16/9"
-      spinner-color="primary"
-      spinner-size="82px"
-    />
     <q-form
       class="q-gutter-md"
       @submit="onSubmit"
@@ -67,6 +61,13 @@ function onReset() {
       <q-file v-model="rewardImage" outlined>
         <template #prepend>
           <q-icon name="attach_file" />
+        </template>
+        <template #append>
+          <q-avatar size="50px">
+            <q-img
+              :src="previewImage"
+            />
+          </q-avatar>
         </template>
       </q-file>
       <div>

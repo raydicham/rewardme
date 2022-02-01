@@ -43,7 +43,7 @@ function onReset() {
 </script>
 
 <template>
-  <div class="md:w-1/2 mx-auto">
+  <div class="p-4 md:p-0 md:w-1/2 mx-auto">
     New Task
     <q-expansion-item
       expand-separator
