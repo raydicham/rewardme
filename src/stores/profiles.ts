@@ -10,7 +10,7 @@ type ProfileSummaryType = z.infer<typeof ProfileSummary>
 
 const makeActiveKey = (profile: ProfileType|ProfileSummaryType) => `rewardme::profile::${profile.id}`
 
-function useOneProfile(key: Ref) {
+function useOneProfile(key: Ref<string>) {
   const profile = reactive(JSON.parse(localStorage.getItem(key.value) || '{}') as ProfileType)
 
   watch(key, () => {
@@ -62,9 +62,9 @@ export const useProfiles = defineStore('profiles', () => {
   function archiveProfile(profile: ProfileType|ProfileSummaryType) {
     profiles.value = profiles.value.filter(summary => summary.id !== profile.id)
     _archive.value.push(profile.id)
-    Object.assign(active, Profile.parse({}))
+    activeKey.value = ''
 
-    if (activeKey.value === makeActiveKey(profile)) {
+    if (profiles.value.length > 0) {
       const nextActive = profiles.value.find(summary => !summary.archive)
       if (nextActive) setActiveProfile(nextActive)
     }

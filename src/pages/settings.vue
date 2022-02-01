@@ -23,7 +23,8 @@ function onSubmit(profile: ProfileType) {
     <h2 class="text-bold text-xl">
       Current Profile
     </h2>
-    <ProfileForm :model-value="profileStore.active" @submit="onSubmit" />
+
+    <ProfileForm v-if="profileStore.profiles.length > 0" :model-value="profileStore.active" @submit="onSubmit" />
   </div>
 </template>
 
