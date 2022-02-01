@@ -18,9 +18,12 @@ declare module 'vue' {
     CarbonTouch1: typeof import('~icons/carbon/touch1')['default']
     CarbonTrashCan: typeof import('~icons/carbon/trash-can')['default']
     CarbonUserFollow: typeof import('~icons/carbon/user-follow')['default']
+    CarbonWarning: typeof import('~icons/carbon/warning')['default']
     Footer: typeof import('./components/Footer.vue')['default']
     ProfileForm: typeof import('./components/ProfileForm.vue')['default']
     README: typeof import('./components/README.md')['default']
+    RewardForm: typeof import('./components/RewardForm.vue')['default']
+    TaskForm: typeof import('./components/TaskForm.vue')['default']
   }
 }
 

@@ -1,12 +1,18 @@
 <script setup lang="ts">
 import type { z } from 'zod'
+
 import { Task } from '~/schemas'
 import { useTasks } from '~/stores/tasks'
 import { useRewards } from '~/stores/rewards'
 
 type TaskType = z.infer<typeof Task>
+
 const props = defineProps({
-  reward: {
+  rewardid: {
+    type: String,
+    required: true,
+  },
+  taskid: {
     type: String,
     required: true,
   },
@@ -16,16 +22,17 @@ const store = useTasks()
 const rewardStore = useRewards()
 const router = useRouter()
 
-const linkedReward = rewardStore.getById(props.reward)
+const reward = rewardStore.getById(props.rewardid)
+const task = reward.tasks[props.taskid]
 
 function onSubmit(task: TaskType) {
   const safeTask = Task.safeParse(task)
   if (safeTask.success) {
-    store.storeNewTask(linkedReward, safeTask.data)
+    store.storeNewTask(reward, safeTask.data)
     router.push({
       name: 'rewards-rewardid',
       params: {
-        rewardid: props.reward,
+        rewardid: props.rewardid,
       },
     })
   }
@@ -37,7 +44,7 @@ function onSubmit(task: TaskType) {
 
 <template>
   <div class="p-4 md:p-0 md:w-1/2 mx-auto">
-    New Task
-    <TaskForm :reward="linkedReward" @submit="onSubmit" />
+    Edit Task
+    <TaskForm :reward="reward" :model-value="task" @submit="onSubmit" />
   </div>
 </template>
