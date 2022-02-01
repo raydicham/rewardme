@@ -7,6 +7,7 @@ type ProfileType = z.infer<typeof Profile>
 const props = defineProps({
   modelValue: {
     default: {
+      image: '',
       name: '',
       nickname: '',
       color: '',
