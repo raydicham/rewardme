@@ -24,6 +24,7 @@ declare module 'vue' {
     ProfileMenu: typeof import('./components/ProfileMenu.vue')['default']
     README: typeof import('./components/README.md')['default']
     RewardForm: typeof import('./components/RewardForm.vue')['default']
+    RewardProgress: typeof import('./components/RewardProgress.vue')['default']
     TaskForm: typeof import('./components/TaskForm.vue')['default']
   }
 }

@@ -51,21 +51,22 @@ reward.image && imageCache.getImage(reward.image).then((image) => {
             <div class="text-2xl absolute bottom-0 left-0 text-left capitalize">
               {{ reward.name }}
             </div>
+            <q-btn
+              fab
+              color="primary"
+              class="absolute"
+              style="bottom: 0; right: 12px; transform: translateY(-50%);"
+              :to="{
+                name: 'rewards-rewardid-edit',
+                params: {
+                  rewardid: props.rewardid
+                }
+              }"
+            >
+              <carbon-edit />
+            </q-btn>
           </q-img>
-          <q-btn
-            fab
-            color="primary"
-            class="absolute"
-            style="bottom: 0; right: 12px; transform: translateY(-50%);"
-            :to="{
-              name: 'rewards-rewardid-edit',
-              params: {
-                rewardid: props.rewardid
-              }
-            }"
-          >
-            <carbon-edit />
-          </q-btn>
+          <RewardProgress m="t-2" :reward="reward" />
         </q-card-section>
         <q-card-section>
           <q-list>

@@ -62,11 +62,7 @@ rewards && Object.values(rewards)
                     {{ reward.name }} <LastUpdated :date="reward.updateddate" />
                   </q-item-label>
                   <q-item-label caption>
-                    <ul class="list-disc list-inside">
-                      <li v-for="task in reward.tasks" :key="task.id">
-                        {{ task.name }}
-                      </li>
-                    </ul>
+                    <RewardProgress m="t-2" :reward="reward" size="20px" />
                   </q-item-label>
                 </q-item-section>
                 <q-item-section side>

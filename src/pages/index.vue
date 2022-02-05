@@ -84,7 +84,7 @@ const numberOfProfiles = Object.keys(profileStore.profiles.filter(profile => !pr
       </q-btn>
     </div>
     <div class="Tasks">
-      <div class="w-full md:w-1/2 mx-auto">
+      <div class="w-full md:w-2/3 mx-auto">
         <div w="full">
           <q-toolbar class="bg-primary text-white shadow-2">
             <q-toolbar-title>Pending Tasks</q-toolbar-title>
@@ -99,6 +99,7 @@ const numberOfProfiles = Object.keys(profileStore.profiles.filter(profile => !pr
               >
                 <q-item-label header class="cursor-pointer">
                   {{ reward.name }}
+                  <RewardProgress m="t-2" :reward="reward" size="20px" />
                 </q-item-label>
                 <q-item v-for="(task, key) in reward.tasks" :key="key" v-ripple clickable>
                   <q-item-section>
