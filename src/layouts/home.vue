@@ -1,9 +1,20 @@
 <template>
-  <main class="px-4 py-10 text-center text-gray-700 dark:text-gray-200">
-    <router-view />
-    <Footer />
-    <div class="mt-5 mx-auto text-center opacity-25 text-sm">
-      [Home Layout]
-    </div>
-  </main>
+  <div class="max-w-screen-2xl mx-auto h-full">
+    <q-layout view="lHr LpR lFr" container style="height:100%">
+      <q-header>
+        <q-toolbar>
+          <q-toolbar-title class="shrink-0 overflow-visible">
+            <q-btn to="/" flat padding="0" size="lg" no-caps>
+              RewardMe
+            </q-btn>
+          </q-toolbar-title>
+
+          <ProfileMenu />
+        </q-toolbar>
+      </q-header>
+      <q-page-container>
+        <router-view />
+      </q-page-container>
+    </q-layout>
+  </div>
 </template>

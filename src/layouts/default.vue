@@ -9,18 +9,17 @@
             </q-btn>
           </q-toolbar-title>
           <div w="full" class="flex justify-center">
-            <q-tabs class="mobile-hide ">
+            <q-tabs class="mobile-hide">
               <q-route-tab name="kids" to="/">
-                Kids
+                Home
               </q-route-tab>
               <q-route-tab name="rewards" to="/rewards">
                 Rewards
               </q-route-tab>
             </q-tabs>
           </div>
-          <q-btn size="lg" flat to="/settings">
-            <carbon-settings />
-          </q-btn>
+
+          <ProfileMenu />
         </q-toolbar>
       </q-header>
       <q-page-container>
@@ -29,8 +28,8 @@
       <q-footer elevated class="desktop-hide">
         <q-tabs :align="'center'">
           <q-route-tab name="kids" to="/">
-            <carbon-pedestrian-child />
-            Kids
+            <carbon-home />
+            Home
           </q-route-tab>
           <q-route-tab name="rewards" to="/rewards">
             <carbon-gift />

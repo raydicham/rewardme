@@ -8,6 +8,8 @@ export default defineConfig({
   attributify: true,
   plugins: [
     typography(),
+    require('windicss/plugin/aspect-ratio'),
+
   ],
   theme: {
     extend: {
