@@ -59,7 +59,7 @@ rewards && Object.values(rewards)
                 </q-item-section>
                 <q-item-section>
                   <q-item-label>
-                    {{ reward.name }}
+                    {{ reward.name }} <LastUpdated :date="reward.updateddate" />
                   </q-item-label>
                   <q-item-label caption>
                     <ul class="list-disc list-inside">
@@ -90,6 +90,7 @@ rewards && Object.values(rewards)
       </q-card>
     </div>
     <q-page-sticky
+      v-if="store.active"
       position="bottom-right"
       :offset="[25,25]"
     >

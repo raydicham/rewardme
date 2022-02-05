@@ -100,6 +100,9 @@ reward.image && imageCache.getImage(reward.image).then((image) => {
 
               <q-item-section>
                 <q-item-label>{{ task.name }}</q-item-label>
+                <q-item-label caption>
+                  <LastUpdated :date="task.updateddate" />
+                </q-item-label>
               </q-item-section>
               <q-item-section side>
                 <q-btn stretch>

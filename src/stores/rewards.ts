@@ -12,6 +12,10 @@ export const useRewards = defineStore('rewards', () => {
   })
 
   function storeNewReward(reward: RewardType) {
+    if (reward.id in profileStore.active.rewards) {
+      // update
+      reward.updateddate = new Date().toUTCString()
+    }
     profileStore.active.rewards[reward.id] = reward
     return reward
   }
