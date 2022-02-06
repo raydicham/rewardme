@@ -3,6 +3,7 @@ import type { z } from 'zod'
 import imageCache from '~/composites/imageCache'
 import type { Task } from '~/schemas'
 import { useProfiles } from '~/stores/profiles'
+import { useRewards } from '~/stores/rewards'
 
 type TaskType = z.infer<typeof Task>
 
@@ -15,6 +16,7 @@ const props = defineProps({
 
 const router = useRouter()
 const profileStore = useProfiles()
+const rewardStore = useRewards()
 const rewards = profileStore.active.rewards
 const reward = rewards[props.rewardid]
 const tasks = reward.tasks
@@ -35,6 +37,17 @@ reward.image && imageCache.getImage(reward.image).then((image) => {
   rewardImage.value = image
 })
 
+watch(tasks, (newTasks) => {
+  const allComplete = Object.values(newTasks).filter(task => !task.done).length === 0
+  if (allComplete)
+    reward.claimed = true
+
+  else
+    reward.claimed = false
+
+  rewardStore.storeNewReward(reward)
+})
+
 </script>
 
 <template>
@@ -48,8 +61,11 @@ reward.image && imageCache.getImage(reward.image).then((image) => {
             spinner-color="primary"
             spinner-size="82px"
           >
-            <div class="text-2xl absolute bottom-0 left-0 text-left capitalize">
-              {{ reward.name }}
+            <div class="text-2xl absolute bottom-0 left-0 text-left capitalize reward-name-container">
+              <div class="name">
+                {{ reward.name }}
+              </div>
+              <carbon-star v-if="reward.claimed" class="claimed" text="yellow-400" />
             </div>
             <q-btn
               fab
@@ -173,3 +189,28 @@ reward.image && imageCache.getImage(reward.image).then((image) => {
 meta:
   layout: default
 </route>
+
+<style>
+.reward-name-container {
+  display: grid;
+  grid-template-columns: 1fr 0.3fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  justify-items: stretch;
+  justify-content: space-evenly;
+  grid-template-areas:
+    "name claimed";
+}
+
+.name {
+  justify-self: center;
+  grid-area: name;
+}
+
+.claimed {
+  justify-self: end;
+  grid-area: claimed;
+}
+
+</style>
