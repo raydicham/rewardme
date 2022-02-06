@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { z } from 'zod'
-import imageCache from '~/composites/imageCache'
 import coverPng from '~/png/reward.png'
 import { useProfiles } from '~/stores/profiles'
 const store = useProfiles()
