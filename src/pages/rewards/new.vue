@@ -18,8 +18,13 @@ function onSubmit(reward: RewardType) {
 </script>
 
 <template>
-  <div class="p-4 md:p-0 md:w-1/2 mx-auto">
-    New Reward
+  <div class="md:w-1/2 mx-auto">
+    <q-toolbar>
+      <q-toolbar-title>
+        New Reward
+      </q-toolbar-title>
+    </q-toolbar>
+
     <RewardForm @submit="onSubmit" />
   </div>
 </template>

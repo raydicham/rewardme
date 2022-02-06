@@ -19,10 +19,12 @@ function onSubmit(profile: ProfileType) {
 </script>
 
 <template>
-  <div class="p-4 md:p-0 md:w-1/2 mx-auto">
-    <h1 class="text-bold text-2xl">
-      New Profile
-    </h1>
+  <div class="md:w-1/2 mx-auto">
+    <q-toolbar>
+      <q-toolbar-title>
+        New Profile
+      </q-toolbar-title>
+    </q-toolbar>
 
     <ProfileForm @submit="onSubmit" />
   </div>

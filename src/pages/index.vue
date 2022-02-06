@@ -6,14 +6,13 @@ import imageCache from '~/composites/imageCache'
 import { useProfiles } from '~/stores/profiles'
 import useActiveProfileImage from '~/composables/useActiveProfileImage'
 
-type rewardType = z.infer<typeof Reward>
+type RewardType = z.infer<typeof Reward>
 
-const router = useRouter()
 const profileStore = useProfiles()
 const profileImage = useActiveProfileImage()
 const rewards = profileStore.active.rewards
 const rewardImages = [] as string[]
-const tasksPending = {} as Record<string, rewardType>
+const tasksPending = {} as Record<string, RewardType>
 
 for (const key in rewards) {
   const reward = rewards[key]
@@ -54,7 +53,7 @@ const numberOfProfiles = Object.keys(profileStore.profiles.filter(profile => !pr
 </script>
 
 <template>
-  <q-page class="dashboardcontainer p-4 md:w-2/3 md:mx-auto">
+  <q-page class="dashboardcontainer p-4 xl:w-2/3 md:mx-auto">
     <div class="Profiles flex">
       <q-btn class="flex-1" padding="5px" no-caps push to="/profiles" :rounded="false">
         <q-img v-if="profileImage" :src="profileImage" ratio="1">
@@ -90,42 +89,8 @@ const numberOfProfiles = Object.keys(profileStore.profiles.filter(profile => !pr
             <q-toolbar-title>Pending Tasks</q-toolbar-title>
           </q-toolbar>
           <div v-if="Object.keys(tasksPending).length > 0" class="space-y-4">
-            <div v-for="reward in tasksPending" :key="reward.id" class="relative">
-              <q-list
-                class="shadow-lg"
-                bordered dense
-                @click="router.push({name: 'rewards-rewardid', params: {
-                  rewardid: reward.id
-                }})"
-              >
-                <div class="hover:bg-black hover:opacity-10 inset-0 absolute cursor-pointer" tabindex="-1" />
-                <q-item-label header>
-                  {{ reward.name }}
-                  <RewardProgress m="t-2" :reward="reward" size="20px" />
-                </q-item-label>
-                <q-item v-for="(task, key) in reward.tasks" :key="key">
-                  <div class="hover:bg-black hover:opacity-10 inset-0 absolute cursor-pointer" tabindex="-1" />
-                  <q-item-section>
-                    <p class="flex items-center">
-                      {{ task.name }} <carbon-chevron-right p="l-2" text="xl" />
-                    </p>
-                  </q-item-section>
-                </q-item>
-              </q-list>
-            </div>
+            <RewardList :rewards="tasksPending" />
           </div>
-          <q-item
-            v-else
-            v-ripple
-            class="bg-gray-200"
-          >
-            <q-item-section side>
-              <carbon-arrow-down-right />
-            </q-item-section>
-            <q-item-section>
-              Add rewards to get started
-            </q-item-section>
-          </q-item>
         </div>
       </div>
     </div>

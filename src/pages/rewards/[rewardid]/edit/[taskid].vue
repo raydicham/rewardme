@@ -43,8 +43,12 @@ function onSubmit(task: TaskType) {
 </script>
 
 <template>
-  <div class="p-4 md:p-0 md:w-1/2 mx-auto">
-    Edit Task
+  <div class="md:w-1/2 mx-auto">
+    <q-toolbar>
+      <q-toolbar-title>
+        Edit Task
+      </q-toolbar-title>
+    </q-toolbar>
     <TaskForm :reward="reward" :model-value="task" @submit="onSubmit" />
   </div>
 </template>

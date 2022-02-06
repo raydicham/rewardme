@@ -10,10 +10,12 @@ export const useTasks = defineStore('tasks', () => {
   const profileStore = useProfiles()
 
   function storeNewTask(reward: RewardType, task: TaskType) {
+    const updateddate = new Date().toUTCString()
     if (task.id in profileStore.active.rewards[reward.id].tasks) {
       // update
-      task.updateddate = new Date().toUTCString()
+      task.updateddate = updateddate
     }
+    reward.updateddate = updateddate
     profileStore.active.rewards[reward.id].tasks[task.id] = task
     return task
   }
@@ -28,7 +30,7 @@ export const useTasks = defineStore('tasks', () => {
         newTasks[key] = reward.tasks[key]
       }
     }
-
+    reward.updateddate = new Date().toUTCString()
     profileStore.active.rewards[reward.id].tasks = newTasks
   }
 

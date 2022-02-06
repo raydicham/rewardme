@@ -27,7 +27,7 @@ function activateAndEdit(profile: ProfileType) {
 <template>
   <q-page>
     <div class="flex justify-center">
-      <q-card w="full md:1/2">
+      <q-card w="full md:2/3">
         <q-img
           :ratio="16/9"
           :src="coverPng"
@@ -38,21 +38,14 @@ function activateAndEdit(profile: ProfileType) {
             Profiles
           </div>
         </q-img>
+        <q-card-actions>
+          <q-btn stretch round no-caps w="full" class="bg-secondary" to="/profiles/new">
+            <carbon-add text="lg" /> <span>Add Profile</span>
+          </q-btn>
+        </q-card-actions>
         <q-card-section>
-          <q-list separator>
-            <q-item
-              v-ripple
-              clickable
-              class="bg-secondary text-white"
-              to="/profiles/new"
-            >
-              <q-item-section avatar>
-                <carbon-add text="lg" />
-              </q-item-section>
-              <q-item-section>Add Profile</q-item-section>
-            </q-item>
-            <q-separator />
-            <template v-if="store.profiles">
+          <template v-if="!!store.profiles">
+            <q-list>
               <q-item
                 v-for="(profile,key) in store.profiles" :key="key"
               >
@@ -105,19 +98,14 @@ function activateAndEdit(profile: ProfileType) {
                   </q-btn>
                 </q-item-section>
               </q-item>
-            </template>
-            <q-item
-              v-else
-              v-ripple
-            >
-              <q-item-section side>
-                <carbon-arrow-down-right />
-              </q-item-section>
-              <q-item-section>
-                Add a profile to get started
-              </q-item-section>
-            </q-item>
-          </q-list>
+            </q-list>
+          </template>
+        </q-card-section>
+        <q-card-section v-if="!!!store.profiles">
+          <div class="flex space-x-4 justify-center">
+            <p>Add a profile to get started</p>
+            <carbon-arrow-down-right />
+          </div>
         </q-card-section>
       </q-card>
     </div>

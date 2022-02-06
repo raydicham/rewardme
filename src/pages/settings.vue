@@ -5,26 +5,37 @@ import { useProfiles } from '~/stores/profiles'
 
 type ProfileType = z.infer<typeof Profile>
 const profileStore = useProfiles()
+const router = useRouter()
 
 function onSubmit(profile: ProfileType) {
   const safeProfile = Profile.safeParse(profile)
-  if (safeProfile.success)
+  if (safeProfile.success) {
     Object.assign(profileStore.active, safeProfile.data)
+    router.push('/profiles')
+  }
 }
 
 </script>
 
 <template>
   <div class="md:w-1/2 mx-auto">
-    <h1 class="text-bold text-2xl">
-      Settings
-    </h1>
-
-    <h2 class="text-bold text-xl">
-      Current Profile
-    </h2>
-
-    <ProfileForm v-if="profileStore.profiles.length > 0" :model-value="profileStore.active" @submit="onSubmit" />
+    <q-toolbar>
+      <q-toolbar-title>
+        Settings
+      </q-toolbar-title>
+    </q-toolbar>
+    <q-card>
+      <q-card-section>
+        <q-toolbar class="text-white bg-primary">
+          <q-toolbar-title>
+            Current Profile
+          </q-toolbar-title>
+        </q-toolbar>
+      </q-card-section>
+      <q-card-section>
+        <ProfileForm v-if="profileStore.profiles.length > 0" :model-value="profileStore.active" @submit="onSubmit" />
+      </q-card-section>
+    </q-card>
   </div>
 </template>
 

@@ -36,8 +36,12 @@ function onSubmit(task: TaskType) {
 </script>
 
 <template>
-  <div class="p-4 md:p-0 md:w-1/2 mx-auto">
-    New Task
+  <div class="md:w-1/2 mx-auto">
+    <q-toolbar>
+      <q-toolbar-title>
+        New Task
+      </q-toolbar-title>
+    </q-toolbar>
     <TaskForm :reward="linkedReward" @submit="onSubmit" />
   </div>
 </template>

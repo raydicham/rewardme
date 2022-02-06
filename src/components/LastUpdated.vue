@@ -11,7 +11,6 @@ export default {
   components: { UseTimeAgo },
   props: {
     date: {
-      type: Date,
       required: true,
     },
   },

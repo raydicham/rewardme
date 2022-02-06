@@ -53,7 +53,7 @@ watch(tasks, (newTasks) => {
 <template>
   <q-page>
     <div class="flex flex-col items-center">
-      <q-card w="full md:1/2">
+      <q-card w="full md:2/3">
         <q-card-section>
           <q-img
             :ratio="16/9"
@@ -61,29 +61,42 @@ watch(tasks, (newTasks) => {
             spinner-color="primary"
             spinner-size="82px"
           >
-            <div class="text-2xl absolute bottom-0 left-0 text-left capitalize reward-name-container">
+            <div class="text-2xl absolute bottom-0 left-0 text-left capitalize reward-name-container space-x-4">
               <div class="name">
                 {{ reward.name }}
               </div>
               <carbon-star v-if="reward.claimed" class="claimed" text="yellow-400" />
             </div>
-            <q-btn
-              fab
-              color="primary"
-              class="absolute"
-              style="bottom: 0; right: 12px; transform: translateY(-50%);"
-              :to="{
-                name: 'rewards-rewardid-edit',
-                params: {
-                  rewardid: props.rewardid
-                }
-              }"
-            >
-              <carbon-edit />
-            </q-btn>
           </q-img>
+          <q-btn
+            fab
+            color="primary"
+            class="absolute"
+            style="bottom: 20px; right: 12px; transform: translateY(-50%);"
+            :to="{
+              name: 'rewards-rewardid-edit',
+              params: {
+                rewardid: props.rewardid
+              }
+            }"
+          >
+            <carbon-edit />
+          </q-btn>
           <RewardProgress m="t-2" :reward="reward" />
         </q-card-section>
+        <q-card-actions>
+          <q-btn
+            stretch round no-caps w="full" class="bg-secondary" :to="{
+              name: 'tasks-new-reward',
+              params: {
+                reward: reward.id
+              }
+            }"
+          >
+            <carbon-add text="lg" />
+            <span>Add Task</span>
+          </q-btn>
+        </q-card-actions>
         <q-card-section>
           <q-list>
             <q-item-section>
@@ -91,22 +104,6 @@ watch(tasks, (newTasks) => {
                 Tasks
               </q-item-label>
             </q-item-section>
-            <q-item
-              v-ripple
-              clickable
-              class="bg-secondary text-white"
-              :to="{
-                name: 'tasks-new-reward',
-                params: {
-                  reward: reward.id
-                }
-              }"
-            >
-              <q-item-section avatar>
-                <carbon-add text="lg" />
-              </q-item-section>
-              <q-item-section>Add Task</q-item-section>
-            </q-item>
             <q-item v-for="task in tasks" :key="task.id" tag="label">
               <q-item-section side top>
                 <q-checkbox v-model="task.done" color="positive" />
@@ -193,7 +190,7 @@ meta:
 <style>
 .reward-name-container {
   display: grid;
-  grid-template-columns: 1fr 0.3fr;
+  grid-template-columns: 1fr 0.0fr;
   grid-template-rows: 1fr;
   gap: 0px 0px;
   grid-auto-flow: row;
@@ -204,7 +201,7 @@ meta:
 }
 
 .name {
-  justify-self: center;
+  justify-self: start;
   grid-area: name;
 }
 

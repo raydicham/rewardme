@@ -1,18 +1,10 @@
 <script setup lang="ts">
+import type { z } from 'zod'
 import imageCache from '~/composites/imageCache'
 import coverPng from '~/png/reward.png'
 import { useProfiles } from '~/stores/profiles'
 const store = useProfiles()
 const rewards = store.active.rewards
-const rewardImages = ref({} as Record<string, string>)
-
-rewards && Object.values(rewards)
-  .map(async(reward) => {
-    if (reward.image !== undefined) {
-      const image = await imageCache.getImage(reward.image)
-      if (image) rewardImages.value[reward.image] = image
-    }
-  })
 </script>
 
 <template>
@@ -29,62 +21,28 @@ rewards && Object.values(rewards)
             Rewards
           </div>
         </q-img>
-        <q-card-section p="0 sm:4">
-          <q-list bordered>
-            <q-item
-              v-if="!!rewards"
-              v-ripple
-              clickable
-              class="bg-secondary text-white"
-              :border="false"
-              to="/rewards/new"
-            >
-              <q-item-section avatar>
-                <carbon-add text="lg" />
-              </q-item-section>
-              <q-item-section>Add Reward</q-item-section>
-            </q-item>
-            <q-separator />
-            <div v-if="!!rewards && Object.keys(rewards).length > 0">
-              <q-item
-                v-for="reward in rewards"
-                :key="reward.id"
-                tag="label"
-                :to="{name: 'rewards-rewardid', params: {
-                  rewardid: reward.id
-                }}"
-              >
-                <q-item-section v-if="reward.image" avatar>
-                  <img :src="reward.image && rewardImages[reward.image]" alt="" w="50px" border="rounded-full">
-                </q-item-section>
-                <q-item-section>
-                  <q-item-label>
-                    {{ reward.name }} <LastUpdated :date="reward.updateddate" />
-                  </q-item-label>
-                  <q-item-label caption>
-                    <RewardProgress m="t-2" :reward="reward" size="20px" />
-                  </q-item-label>
-                </q-item-section>
-                <q-item-section side>
-                  <carbon-chevron-right text="xl" font="bold" />
-                </q-item-section>
-              </q-item>
+        <q-card-actions>
+          <q-btn stretch round no-caps w="full" class="bg-secondary" to="/rewards/new">
+            <carbon-add text="lg" />
+            <span>Add Reward</span>
+          </q-btn>
+        </q-card-actions>
+        <template v-if="!!rewards && Object.keys(rewards).length > 0">
+          <q-card-section p="0 sm:4">
+            <RewardList :rewards="rewards" />
+          </q-card-section>
+        </template>
+        <template v-if="!!!rewards">
+          <q-card-section>
+            <div class="flex space-x-4 justify-center">
+              <p>Add a reward</p>
+              <carbon-arrow-down-right />
             </div>
-            <q-item
-              v-else
-              v-ripple
-            >
-              <q-item-section side>
-                <carbon-arrow-down-right />
-              </q-item-section>
-              <q-item-section>
-                Add rewards to get started
-              </q-item-section>
-            </q-item>
-          </q-list>
-        </q-card-section>
+          </q-card-section>
+        </template>
       </q-card>
     </div>
+
     <q-page-sticky
       v-if="store.active"
       position="bottom-right"
