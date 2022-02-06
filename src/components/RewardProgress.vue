@@ -27,7 +27,7 @@ export default {
       return this.tasksComplete / this.totalTasks
     },
     label() {
-      return `${this.tasksComplete} / ${this.totalTasks}`
+      return this.totalTasks ? `${this.tasksComplete} / ${this.totalTasks}` : 'Add Tasks'
     },
   },
 }

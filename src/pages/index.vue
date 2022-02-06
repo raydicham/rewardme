@@ -90,18 +90,21 @@ const numberOfProfiles = Object.keys(profileStore.profiles.filter(profile => !pr
             <q-toolbar-title>Pending Tasks</q-toolbar-title>
           </q-toolbar>
           <div v-if="Object.keys(tasksPending).length > 0" class="space-y-4">
-            <template v-for="reward in tasksPending" :key="reward.id">
+            <div v-for="reward in tasksPending" :key="reward.id" class="relative">
               <q-list
+                class="shadow-lg"
                 bordered dense
                 @click="router.push({name: 'rewards-rewardid', params: {
                   rewardid: reward.id
                 }})"
               >
-                <q-item-label header class="cursor-pointer">
+                <div class="hover:bg-black hover:opacity-10 inset-0 absolute cursor-pointer" tabindex="-1" />
+                <q-item-label header>
                   {{ reward.name }}
                   <RewardProgress m="t-2" :reward="reward" size="20px" />
                 </q-item-label>
-                <q-item v-for="(task, key) in reward.tasks" :key="key" v-ripple clickable>
+                <q-item v-for="(task, key) in reward.tasks" :key="key">
+                  <div class="hover:bg-black hover:opacity-10 inset-0 absolute cursor-pointer" tabindex="-1" />
                   <q-item-section>
                     <p class="flex items-center">
                       {{ task.name }} <carbon-chevron-right p="l-2" text="xl" />
@@ -109,7 +112,7 @@ const numberOfProfiles = Object.keys(profileStore.profiles.filter(profile => !pr
                   </q-item-section>
                 </q-item>
               </q-list>
-            </template>
+            </div>
           </div>
           <q-item
             v-else
