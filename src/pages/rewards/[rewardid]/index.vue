@@ -3,7 +3,7 @@ import type { z } from 'zod'
 import imageCache from '~/composites/imageCache'
 import type { Task } from '~/schemas'
 import { useProfiles } from '~/stores/profiles'
-import { useRewards } from '~/stores/rewards'
+import useRewards from '~/composables/useRewards'
 
 type TaskType = z.infer<typeof Task>
 

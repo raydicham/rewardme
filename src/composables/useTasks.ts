@@ -1,12 +1,11 @@
-import { acceptHMRUpdate, defineStore } from 'pinia'
 import type { z } from 'zod'
-import { useProfiles } from './profiles'
+import { useProfiles } from '~/stores/profiles'
 import type { Reward, Task } from '~/schemas'
 
 type TaskType = z.infer<typeof Task>
 type RewardType = z.infer<typeof Reward>
 
-export const useTasks = defineStore('tasks', () => {
+export default function useTasks() {
   const profileStore = useProfiles()
 
   function storeNewTask(reward: RewardType, task: TaskType) {
@@ -43,7 +42,4 @@ export const useTasks = defineStore('tasks', () => {
     getByReward,
     deleteTask,
   }
-})
-
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useTasks, import.meta.hot))
+}

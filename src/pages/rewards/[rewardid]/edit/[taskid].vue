@@ -2,8 +2,8 @@
 import type { z } from 'zod'
 
 import { Task } from '~/schemas'
-import { useTasks } from '~/stores/tasks'
-import { useRewards } from '~/stores/rewards'
+import useTasks from '~/composables/useTasks'
+import useRewards from '~/composables/useRewards'
 
 type TaskType = z.infer<typeof Task>
 

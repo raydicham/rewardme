@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { z } from 'zod'
 import { Reward } from '~/schemas'
-import { useRewards } from '~/stores/rewards'
+import useRewards from '~/composables/useRewards'
 import { useProfiles } from '~/stores/profiles'
 
 type RewardType = z.infer<typeof Reward>
@@ -24,7 +24,12 @@ function onSubmit(reward: RewardType) {
   const safeReward = Reward.safeParse(reward)
   if (safeReward.success) {
     rewardStore.storeNewReward(safeReward.data)
-    router.push('/rewards')
+    router.push({
+      name: 'rewards-rewardid',
+      params: {
+        rewardid: props.rewardid,
+      },
+    })
   }
 }
 

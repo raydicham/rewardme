@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { z } from 'zod'
 import { Reward } from '~/schemas'
-import { useRewards } from '~/stores/rewards'
+import useRewards from '~/composables/useRewards'
 
 type RewardType = z.infer<typeof Reward>
 const router = useRouter()

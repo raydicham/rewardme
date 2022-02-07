@@ -1,11 +1,10 @@
-import { acceptHMRUpdate, defineStore } from 'pinia'
 import type { z } from 'zod'
-import { useProfiles } from './profiles'
+import { useProfiles } from '~/stores/profiles'
 import type { Reward } from '~/schemas'
 
 type RewardType = z.infer<typeof Reward>
 
-export const useRewards = defineStore('rewards', () => {
+export default function() {
   const profileStore = useProfiles()
   const rewards = computed(() => {
     return profileStore.active?.rewards
@@ -29,7 +28,4 @@ export const useRewards = defineStore('rewards', () => {
     storeNewReward,
     getById,
   }
-})
-
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useRewards, import.meta.hot))
+}
