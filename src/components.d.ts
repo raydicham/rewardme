@@ -10,6 +10,8 @@ declare module 'vue' {
     CarbonHome: typeof import('~icons/carbon/home')['default']
     DefaultAvatar: typeof import('./components/DefaultAvatar.vue')['default']
     Footer: typeof import('./components/Footer.vue')['default']
+    FullField: typeof import('./components/FullField.vue')['default']
+    FullForm: typeof import('./components/FullForm.vue')['default']
     LastUpdated: typeof import('./components/LastUpdated.vue')['default']
     ProfileForm: typeof import('./components/ProfileForm.vue')['default']
     ProfileMenu: typeof import('./components/ProfileMenu.vue')['default']

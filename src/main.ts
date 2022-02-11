@@ -30,6 +30,9 @@ export const createApp = ViteSSG(
     Object.values(import.meta.globEager('./modules/*.ts')).map(i => i.install?.(ctx))
     ctx.app.use(Quasar, {
       plugins: {},
+      extras: [
+        'poppins-font',
+      ],
     })
   },
 )

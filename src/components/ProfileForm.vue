@@ -52,77 +52,85 @@ const colortrigger = ref(undefined)
   <q-card>
     <q-card-section>
       <div>
-        <q-expansion-item
-          expand-separator
-          label="Profile JSON"
-        >
-          <q-card>
-            <q-card-section>
-              <pre>{{ profile }}</pre>
-            </q-card-section>
-          </q-card>
-        </q-expansion-item>
+        <!-- <q-card>
+          <q-card-section>
+            <pre>{{ profile }}</pre>
+          </q-card-section>
+        </q-card> -->
         <q-form
-          class="q-gutter-md"
+          class="relative w-full"
           @submit="onSubmit"
           @reset="onReset"
         >
-          <q-input v-model="profile.name" label="Name" required stack-la bel />
-          <q-input v-model="profile.nickname" label="Nickname" />
-          <q-input v-model="profile.hobby" label="Hobby" />
+          <FullForm>
+            <FullField>
+              <q-input v-model="profile.name" label="Name" required stack-label />
+            </FullField>
+            <FullField>
+              <q-input v-model="profile.nickname" label="Nickname" stack-label />
+            </FullField>
+          </FullForm>
+          <!-- <q-form
+            class="q-gutter-md"
+            @submit="onSubmit"
+            @reset="onReset"
+          >
+            <q-input v-model="profile.name" label="Name" required stack-label />
+            <q-input v-model="profile.nickname" label="Nickname" stack-label />
+            <q-input v-model="profile.hobby" label="Hobby" stack-label />
 
-          <q-input
-            ref="calendartrigger"
-            model-value=""
-            stack-label
-            :placeholder="profile.dateofbirth"
-            label="Birthday"
-            class="my-input"
-          >
-            <template #append>
-              <carbon-calendar />
-            </template>
-          </q-input>
-          <q-input
-            ref="colortrigger"
-            v-model="profile.color"
-            :style="{'backgroundColor': profile.color}"
-            label="Favourite Color"
-            filled
-            class="my-input"
-          >
-            <template #append>
-              <carbon-color-palette />
-            </template>
-          </q-input>
-          <q-file v-model="profileImage" outlined>
-            <template #prepend>
-              <q-icon name="attach_file" />
-            </template>
-            <template #append>
-              <q-avatar size="50px">
-                <q-img
-                  :src="previewImage"
-                />
-              </q-avatar>
-            </template>
-          </q-file>
-          <div>
-            <q-btn label="Submit" type="submit" color="primary" />
-            <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
-          </div>
+            <q-input
+              ref="calendartrigger"
+              model-value=""
+              stack-label
+              :placeholder="profile.dateofbirth"
+              label="Birthday"
+              class="my-input"
+            >
+              <template #append>
+                <carbon-calendar />
+              </template>
+            </q-input>
+            <q-input
+              ref="colortrigger"
+              v-model="profile.color"
+              :style="{'backgroundColor': profile.color}"
+              label="Favourite Color"
+              filled
+              class="my-input"
+            >
+              <template #append>
+                <carbon-color-palette />
+              </template>
+            </q-input>
+            <q-file v-model="profileImage" outlined>
+              <template #prepend>
+                <q-icon name="attach_file" />
+              </template>
+              <template #append>
+                <q-avatar size="50px">
+                  <q-img
+                    :src="previewImage"
+                  />
+                </q-avatar>
+              </template>
+            </q-file>
+            <div>
+              <q-btn label="Submit" type="submit" color="primary" />
+              <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
+            </div> -->
         </q-form>
 
-        <q-popup-proxy touch-position :target="calendartrigger" transition-show="scale" transition-hide="scale">
-          <q-date
-            v-model="profile.dateofbirth"
-            title="When is your birthday?"
-          />
-        </q-popup-proxy>
+        <!-- <q-popup-proxy touch-position :target="calendartrigger" transition-show="scale" transition-hide="scale">
+            <q-date
+              v-model="profile.dateofbirth"
+              title="When is your birthday?"
+            />
+          </q-popup-proxy>
 
-        <q-popup-proxy touch-position :target="colortrigger" transition-show="scale" transition-hide="scale">
-          <q-color v-model="profile.color" w="300px" no-footer no-header default-view="palette" format-model="hex" />
-        </q-popup-proxy>
+          <q-popup-proxy touch-position :target="colortrigger" transition-show="scale" transition-hide="scale">
+            <q-color v-model="profile.color" w="300px" no-footer no-header default-view="palette" format-model="hex" />
+          </q-popup-proxy> -->
       </div>
     </q-card-section>
   </q-card>

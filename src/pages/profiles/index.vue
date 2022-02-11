@@ -27,22 +27,24 @@ function activateAndEdit(profile: ProfileType) {
 <template>
   <q-page>
     <div class="flex justify-center">
-      <q-card w="full md:2/3">
-        <q-img
-          :ratio="16/9"
-          :src="coverPng"
-          spinner-color="primary"
-          spinner-size="82px"
-        >
-          <div class="fixed bottom-0 left-0 font-bold text-xl">
-            Profiles
-          </div>
-        </q-img>
-        <q-card-actions>
-          <q-btn stretch round no-caps w="full" class="bg-secondary" to="/profiles/new">
+      <q-card w="full md:2/3 xl:1/2">
+        <q-card-section>
+          <q-img
+            :ratio="16/9"
+            :src="coverPng"
+            spinner-color="primary"
+            spinner-size="82px"
+          >
+            <div class="fixed bottom-0 left-0 font-bold text-xl">
+              Profiles
+            </div>
+          </q-img>
+        </q-card-section>
+        <q-card-section>
+          <q-btn stretch round no-caps w="full" class="text-secondary bg-primary" to="/profiles/new">
             <carbon-add text="lg" /> <span>Add Profile</span>
           </q-btn>
-        </q-card-actions>
+        </q-card-section>
         <q-card-section>
           <template v-if="!!store.profiles">
             <q-list>
@@ -70,7 +72,7 @@ function activateAndEdit(profile: ProfileType) {
                     </div>
                   </q-btn>
                 </q-item-section>
-                <q-item-section v-else side class="text-secondary">
+                <q-item-section v-else side class="text-accent">
                   <q-btn unelevated @click="store.setActiveProfile(profile)">
                     <div class="flex items-center">
                       <span p="r-2">switch</span> <carbon-touch-1 />
@@ -110,8 +112,8 @@ function activateAndEdit(profile: ProfileType) {
       </q-card>
     </div>
     <q-page-sticky position="bottom-right" :offset="[25,25]">
-      <q-btn fab color="accent" to="/profiles/new">
-        <span class="pr-2">Add Profile</span> <carbon-user-follow style="font-size: x-large;" />
+      <q-btn fab color="primary" to="/profiles/new" no-caps>
+        <span class="pr-2">Add Profile</span> <carbon-user-follow style="font-size: large;" />
       </q-btn>
     </q-page-sticky>
   </q-page>
