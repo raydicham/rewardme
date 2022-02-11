@@ -48,49 +48,54 @@ onUnmounted(() => {
   clearInterval(interval)
 })
 
-const numberOfProfiles = Object.keys(profileStore.profiles.filter(profile => !profile.archive)).length
-
 </script>
 
 <template>
-  <q-page class="dashboardcontainer p-4 xl:w-2/3 md:mx-auto">
-    <div class="Profiles flex">
-      <q-btn class="flex-1" padding="5px" no-caps push to="/profiles" :rounded="false">
-        <q-img v-if="profileImage" :src="profileImage" ratio="1">
-          <div text="2xl" font="bold">
-            Profiles <span v-if="numberOfProfiles > 0"> ({{ numberOfProfiles }})</span>
-          </div>
-        </q-img>
-        <DefaultAvatar v-else>
-          <div text="2xl" font="bold">
-            <p>Profiles</p><p text="xs">
-              Start here!
-            </p>
-          </div>
-        </DefaultAvatar>
-      </q-btn>
+  <q-page class="p-4 xl:w-2/3 md:mx-auto">
+    <div class="bg-primary rounded-xl p-4 text-center text-white">
+      <p class="font-bold text-xl">
+        Welcome to Reward Me!
+      </p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
     </div>
-    <div class="Rewards flex">
-      <q-btn class="flex-1" padding="5px" no-caps push to="/rewards" :rounded="false">
-        <q-img
-          :src="rewardImages.length > 0 ? imageCycle.state : defaultRewardImage"
-          ratio="1"
-        >
+    <div class="dashboardcontainer pt-4">
+      <div class="Profiles flex">
+        <q-btn class="flex-1" no-caps push to="/profiles" padding="none">
+          <q-img v-if="profileImage" :src="profileImage" class="rounded" />
+          <DefaultAvatar v-else>
+            <div text="2xl" font="bold">
+              <p>Profiles</p><p text="xs">
+                Start here!
+              </p>
+            </div>
+          </DefaultAvatar>
+          <div font="bold">
+            Profiles
+          </div>
+        </q-btn>
+      </div>
+      <div class="Rewards flex">
+        <q-btn class="flex-1" padding="none" no-caps push to="/rewards">
+          <q-img
+            class="rounded"
+            :src="rewardImages.length > 0 ? imageCycle.state : defaultRewardImage"
+            ratio="1"
+          />
           <div>
-            <span text="2xl" font="bold">Rewards</span>
+            <span font="bold">Rewards</span>
           </div>
-        </q-img>
-      </q-btn>
-    </div>
-    <div class="Tasks">
-      <div class="w-full md:w-2/3 mx-auto">
-        <div w="full">
-          <q-toolbar class="bg-primary text-white shadow-2">
-            <q-toolbar-title>Pending Tasks</q-toolbar-title>
-          </q-toolbar>
-          <div v-if="Object.keys(tasksPending).length > 0" class="space-y-4">
-            <RewardList :rewards="tasksPending" />
-          </div>
+        </q-btn>
+      </div>
+      <div class="Tasks">
+        <div class="w-full md:w-2/3 mx-auto">
+          <q-card flat>
+            <q-card-section>
+              <q-toolbar inset class="bg-primary text-white shadow-2 rounded-t-xl">
+                <q-toolbar-title>Pending Tasks</q-toolbar-title>
+              </q-toolbar>
+              <RewardList :rewards="tasksPending" class="rounded-b-xl" />
+            </q-card-section>
+          </q-card>
         </div>
       </div>
     </div>
@@ -99,7 +104,7 @@ const numberOfProfiles = Object.keys(profileStore.profiles.filter(profile => !pr
 
 <route lang="yaml">
 meta:
-  layout: home
+  layout: default
 </route>
 
  <style>

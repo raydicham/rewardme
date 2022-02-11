@@ -1,5 +1,5 @@
 <template>
-  <q-list separator>
+  <q-list separator class="bg-secondary text-primary">
     <q-item
       v-for="reward in sortedRewards"
       :key="reward.id"
@@ -20,7 +20,7 @@
         </q-item-label>
       </q-item-section>
       <q-item-section side>
-        <carbon-chevron-right text="xl" font="bold" />
+        <carbon-chevron-right text="xl" font="bold" class="text-primary" />
       </q-item-section>
     </q-item>
   </q-list>

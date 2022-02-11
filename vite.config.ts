@@ -112,26 +112,26 @@ export default defineConfig({
     // https://github.com/antfu/vite-plugin-pwa
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['logo.png', 'robots.txt', 'safari-pinned-tab.svg'],
+      includeAssets: ['logo.svg', 'robots.txt', 'safari-pinned-tab.svg'],
       manifest: {
         name: 'Reward Me',
         short_name: 'RewardMe',
-        theme_color: '#7894FF',
+        theme_color: '#7989C4',
         icons: [
           {
-            src: '/logo.png',
+            src: '/logo.svg',
             sizes: '192x192',
-            type: 'image/png',
+            type: 'image/svg',
           },
           {
-            src: '/logo.png',
+            src: '/logo.svg',
             sizes: '512x512',
-            type: 'image/png',
+            type: 'image/svg',
           },
           {
-            src: '/logo.png',
+            src: '/logo.svg',
             sizes: '512x512',
-            type: 'image/png',
+            type: 'image/svg',
             purpose: 'any maskable',
           },
         ],

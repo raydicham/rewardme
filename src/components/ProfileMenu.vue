@@ -5,6 +5,9 @@
     />
     <q-menu touch-position>
       <q-list style="min-width: 100px">
+        <q-item v-close-popup clickable to="/rewards">
+          <q-item-section>Rewards</q-item-section>
+        </q-item>
         <q-item v-close-popup clickable to="/profiles">
           <q-item-section>Switch Profile</q-item-section>
         </q-item>

@@ -53,7 +53,7 @@ watch(tasks, (newTasks) => {
 <template>
   <q-page>
     <div class="flex flex-col items-center">
-      <q-card w="full md:2/3">
+      <q-card w="full md:2/3 xl:1/2">
         <q-card-section>
           <q-img
             :ratio="16/9"
@@ -84,9 +84,9 @@ watch(tasks, (newTasks) => {
           </q-btn>
           <RewardProgress m="t-2" :reward="reward" />
         </q-card-section>
-        <q-card-actions>
+        <q-card-section>
           <q-btn
-            stretch round no-caps w="full" class="bg-secondary" :to="{
+            stretch round no-caps w="full" class="bg-primary text-secondary" :to="{
               name: 'tasks-new-reward',
               params: {
                 reward: reward.id
@@ -96,7 +96,7 @@ watch(tasks, (newTasks) => {
             <carbon-add text="lg" />
             <span>Add Task</span>
           </q-btn>
-        </q-card-actions>
+        </q-card-section>
         <q-card-section>
           <q-list>
             <q-item-section>
